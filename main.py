@@ -18,8 +18,6 @@ def write1( file1, str1 ):
 dt = datetime.datetime.today()
 day = dt.date()
 
-
-
 str1 = '''
 <html>
 <head>
@@ -30,7 +28,7 @@ str1 = '''
 {body1} 
 </body>
 </html>
-'''.format( title1 = "hello hstml", body1 = outx ) 
+'''.format( title1 = "output", body1 = outx ) 
 
 print( str1 ) 
 
