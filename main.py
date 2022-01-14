@@ -23,16 +23,21 @@ def write1( file1, str1 ):
 
 if out_type != 'html' and out_type != 'txt':
     print('選択したファイル形式が間違っています。最初からやり直してください。')
+
 else :
-    import os
+    import os      
     import feedparser
-            
     
     d = feedparser.parse(rssurl)
     outx = ""
 
-        
+    if 'title' not in d.feed:
+        print('このURLはRSSフィードのものではありません。あるいは、一つ以上のエントリが登録されていません。最初からやり直してください') 
+        import sys
+        sys.exit()
 
+    print('処理しています...')
+ 
     if out_type == "html": ## HTML
         filetype = ".html"
         for entry in d['entries']:
