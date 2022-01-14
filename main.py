@@ -32,7 +32,7 @@ else :
     outx = ""
 
     if 'title' not in d.feed:
-        print('このURLはRSSフィードのものではありません。あるいは、一つ以上のエントリが登録されていません。最初からやり直してください') 
+        print('Error 変換できませんでした。：このURLはRSSフィードのものではありません。最初からやり直してください') 
         import sys
         sys.exit()
 
