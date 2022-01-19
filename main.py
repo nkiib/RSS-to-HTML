@@ -18,10 +18,17 @@ def output(write1, str1 ,filetype):
 def write1( file1, str1 ): 
     with open( file1, 'w', encoding='utf-8' ) as f1: 
         f1.write( str1 ) 
-    return 0     
+    return 0
+
+def time_split(date):
+    timex = date.split("T")
+    timex2 = timex[1].split("+")
+    datex = timex[0].split("-")
+    publish = datex[0] + "/" + datex[1] + "/" + datex[2] + " " + timex2[0]
+    return publish         
 
 
-if out_type != 'html' and out_type != 'txt':
+if out_type != 'html' and out_type != 'txt' and out_type != 'csv':
     print('選択したファイル形式が間違っています。最初からやり直してください。')
 
 else :
@@ -42,7 +49,7 @@ else :
         filetype = ".html"
         for entry in d['entries']:
             outx += '<a href="'+ entry.link + '">' + entry.title + "</a><br>"
-            outx += entry.published + "<br><br>"
+            outx += time_split(entry.published) + "<br><br>"
 
         str1 = '''
         <html>
@@ -62,15 +69,21 @@ else :
         filetype = ".txt"
         for entry in d['entries']:
             outx += entry.title + '\n' + 'link : '+ entry.link + '\n' 
-            outx += entry.published + '\n' + '\n'
+            outx += time_split(entry.published) + '\n' + '\n'
 
         str1 = '''{body1}'''.format( title1 = "output", body1 = outx ) 
         output(write1, str1 ,filetype)
     
 
     elif out_type == 'csv': # CSV
-        print('CSVに到達')
-            # 未実装
+        filetype= ".csv"
+        outx += 'タイトル,日付,時間,リンク' + '\n'
+        for entry in d['entries']:
+            date = time_split(entry.published).split(" ")
+            outx += entry.title + ',' + date[0] + ',' + date[1] + ',' + entry.link + '\n'
+
+        str1 = '''{body1}'''.format(body1 = outx)
+        output(write1,str1,filetype)
     
     
     elif out_type == 'xml': # XML
