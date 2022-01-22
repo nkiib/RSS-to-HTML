@@ -4,12 +4,12 @@ print('出力したいURLを入力してください')
 rssurl = input()
 print('出力したいファイル名を拡張子なしで入力してください')
 filename = input()
-print('出力形式を入力します。"html"または"txt"で入力してください')
+print('出力形式を入力します。"html"または"txt"または"csv"で入力してください')
 out_type = input()
 
 
 # イベントループ
-def output(write1, str1 ,filetype):
+def output( str1 ,filetype):
     path1 = os.path.dirname(__file__) + "/" 
     file1 = path1 + filename + filetype
     write1( file1, str1 )
@@ -50,7 +50,7 @@ else :
         for entry in d['entries']:
             outx += '<a href="'+ entry.link + '">' + entry.title + "</a><br>"
             outx += time_split(entry.published) + "<br><br>"
-
+        
         str1 = '''
         <html>
             <head>
@@ -62,7 +62,7 @@ else :
             </body>
         </html>'''.format( title1 = "output", body1 = outx ) 
     
-        output(write1, str1 ,filetype) # 出力
+        output(str1 ,filetype) # 出力
     
 
     elif out_type == 'txt': # TXT
@@ -71,8 +71,8 @@ else :
             outx += entry.title + '\n' + 'link : '+ entry.link + '\n' 
             outx += time_split(entry.published) + '\n' + '\n'
 
-        str1 = '''{body1}'''.format( title1 = "output", body1 = outx ) 
-        output(write1, str1 ,filetype)
+        str1 = '''{body1}'''.format(body1 = outx ) 
+        output(str1 ,filetype)
     
 
     elif out_type == 'csv': # CSV
@@ -83,12 +83,4 @@ else :
             outx += entry.title + ',' + date[0] + ',' + date[1] + ',' + entry.link + '\n'
 
         str1 = '''{body1}'''.format(body1 = outx)
-        output(write1,str1,filetype)
-    
-    
-    elif out_type == 'xml': # XML
-        print('XMLに到達')
-        # 未実装
-
-
-    
+        output(str1,filetype)
