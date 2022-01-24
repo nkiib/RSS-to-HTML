@@ -47,6 +47,7 @@ else :
  
     if out_type == "html": ## HTML
         filetype = ".html"
+        tt = d.feed.title
         for entry in d['entries']:
             outx += '<a href="'+ entry.link + '">' + entry.title + "</a><br>"
             outx += time_split(entry.published) + "<br><br>"
@@ -58,9 +59,10 @@ else :
                 <title>{title1}</title>
             </head>
             <body>
+                <h1>{title2}
                 {body1} 
             </body>
-        </html>'''.format( title1 = "output", body1 = outx ) 
+        </html>'''.format( title1 = "output", title2 = tt,body1 = outx ) 
     
         output(str1 ,filetype) # 出力
     
