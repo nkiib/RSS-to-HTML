@@ -28,7 +28,7 @@ def time_split(date):
     return publish         
 
 
-if out_type != 'html' and out_type != 'txt' and out_type != 'csv':
+if out_type != 'html' and out_type != 'txt' and out_type != 'csv' and out_type != 'cmd':
     print('選択したファイル形式が間違っています。最初からやり直してください。')
 
 else :
@@ -84,5 +84,15 @@ else :
             date = time_split(entry.published).split(" ")
             outx += entry.title + ',' + date[0] + ',' + date[1] + ',' + entry.link + '\n'
 
+    elif out_type == 'cmd':
+        outx = "\npage-title:" + d.feed.title + '\n'
+        for entry in d['entries']:
+            date = time_split(entry.published).split(" ")
+            outx += "title     :" + entry.title + '\n' 
+            outx += "published :" + date[0] + ',' + date[1] + "\n"
+            outx += "link      :" + entry.link + '\n\n'
+            
+
         str1 = '''{body1}'''.format(body1 = outx)
-        output(str1,filetype)
+        print(str1)
+        
