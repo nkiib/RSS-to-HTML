@@ -4,7 +4,7 @@ print('出力したいURLを入力してください')
 rssurl = input()
 print('出力したいファイル名を拡張子なしで入力してください')
 filename = input()
-print('出力形式を入力します。"html"または"txt"または"csv"で入力してください')
+print('出力形式を入力します。"html"または"txt"または"csv"で入力してください。コマンドアウトする場合"cmd"と入力してください。')
 out_type = input()
 
 
