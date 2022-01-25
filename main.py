@@ -50,7 +50,7 @@ else :
         tt = d.feed.title
         for entry in d['entries']:
             outx += '<a href="'+ entry.link + '">' + entry.title + "</a><br>"
-            outx += time_split(entry.published) + "<br><br>"
+            outx += time_split(entry.updated) + "<br><br>"
         
         str1 = '''
         <html>
@@ -71,7 +71,7 @@ else :
         filetype = ".txt"
         for entry in d['entries']:
             outx += entry.title + '\n' + 'link : '+ entry.link + '\n' 
-            outx += time_split(entry.published) + '\n' + '\n'
+            outx += time_split(entry.updated) + '\n' + '\n'
 
         str1 = '''{body1}'''.format(body1 = outx ) 
         output(str1 ,filetype)
@@ -81,13 +81,13 @@ else :
         filetype= ".csv"
         outx += 'タイトル,日付,時間,リンク' + '\n'
         for entry in d['entries']:
-            date = time_split(entry.published).split(" ")
+            date = time_split(entry.updated).split(" ")
             outx += entry.title + ',' + date[0] + ',' + date[1] + ',' + entry.link + '\n'
 
     elif out_type == 'cmd':
         outx = "\npage-title:" + d.feed.title + '\n'
         for entry in d['entries']:
-            date = time_split(entry.published).split(" ")
+            date = time_split(entry.updated).split(" ")
             outx += "title     :" + entry.title + '\n' 
             outx += "published :" + date[0] + ',' + date[1] + "\n"
             outx += "link      :" + entry.link + '\n\n'
