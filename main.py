@@ -20,7 +20,12 @@ def write1( file1, str1 ):
         f1.write( str1 ) 
     return 0
 
-def time_split(date):
+def time_split():
+    if 'pubDate' in d.feed:
+        date = time_split(entry.published)
+    elif 'dc:date' in d.feed:
+        date = time_split(entry.updated)
+    print(date)
     timex = date.split("T")
     timex2 = timex[1].split("+")
     datex = timex[0].split("-")
@@ -50,7 +55,9 @@ else :
         tt = d.feed.title
         for entry in d['entries']:
             outx += '<a href="'+ entry.link + '">' + entry.title + "</a><br>"
-            outx += time_split(entry.updated) + "<br><br>"
+            ent_title = time_split()
+            outx += ent_title
+            
         
         str1 = '''
         <html>
